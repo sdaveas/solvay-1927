@@ -1,0 +1,73 @@
+/* Tours and quiz share one panel under the photo. While playing it sticks to the bottom of the
+   screen, so the caption stays visible while you look at the faces (the photo is taller than most screens). */
+.mode-panel {
+  --ok: #9fd18b; --bad: #ec9a86;
+  margin: 18px 0 0; padding: 18px 22px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 12px; box-shadow: 0 10px 40px #000c;
+}
+.mode-panel.playing, .mode-panel.quiz { position: sticky; bottom: 12px; z-index: 5; max-height: 60vh; overflow-y: auto; }
+.mode-title { margin: 0; font: 400 24px/1.2 var(--serif); }
+.mode-sub { margin: 4px 0 14px; color: var(--muted); font-size: 14px; }
+
+.mode-panel button {
+  background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 999px;
+  padding: 6px 14px; font: inherit; font-size: 14px; cursor: pointer;
+}
+.mode-panel button:hover:not(:disabled), .mode-panel button[aria-pressed="true"] { border-color: var(--gold); color: var(--gold); }
+.mode-panel button:disabled { opacity: .4; cursor: default; }
+.mode-panel button:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.mode-panel button.primary { background: var(--gold); border-color: var(--gold); color: #1a1408; font-weight: 600; }
+.mode-panel button.primary:hover { background: #f0d392; border-color: #f0d392; color: #1a1408; }
+
+/* Tours: menu */
+.tour-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.mode-panel .tour-card {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 14px 16px;
+  border-radius: 10px; text-align: left;
+}
+.tour-card strong { font: 400 19px/1.25 var(--serif); }
+.tour-card span { color: var(--muted); font-size: 14px; line-height: 1.45; }
+.tour-card em { margin-top: auto; color: var(--gold); font-style: normal; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+
+/* Tours: player */
+.tour-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.tour-step { margin: 12px 0 0; color: var(--gold); font: 600 12px var(--sans); letter-spacing: .15em; text-transform: uppercase; }
+.tour-text { margin: 6px 0 16px; max-width: 72ch; font: 18px/1.65 var(--serif); }
+.tour-bar, .quiz-bar { display: flex; flex-wrap: wrap; gap: 8px; }
+.tour-keys { margin: 12px 0 0; color: var(--muted); font-size: 12px; }
+
+/* Quiz. The name tooltip would give the answer away. */
+body.quiz-on .tip { display: none !important; }
+.quiz-head { display: flex; justify-content: space-between; color: var(--muted); font: 600 12px var(--sans); letter-spacing: .15em; text-transform: uppercase; }
+.quiz-prompt { margin: 6px 0; font: 400 clamp(22px, 3vw, 30px)/1.25 var(--serif); }
+.quiz-prompt strong { color: var(--gold); font-weight: 400; }
+.quiz-feedback { min-height: 3.2em; margin: 0 0 10px; color: var(--muted); } /* reserve two lines so the panel doesn't jump */
+.quiz-feedback em { color: var(--gold); font-family: var(--serif); font-size: 1.05em; }
+.quiz-feedback .ok, .quiz-feedback .bad { font-weight: 600; }
+.quiz-feedback .ok { color: var(--ok); }
+.quiz-feedback .bad { color: var(--bad); }
+.quiz.done .quiz-prompt { font-size: clamp(26px, 4vw, 38px); }
+
+@media (max-width: 600px) {
+  .mode-panel { padding: 14px; }
+  .mode-panel.playing, .mode-panel.quiz { bottom: 8px; }
+  .tour-text { font-size: 16px; }
+}
+
+/* Pocket tour: strip of modern items */
+.pocket { margin: 10px 0 4px; }
+.pocket-hint { margin: 0 0 6px; font-size: 12px; color: var(--muted); }
+.pocket-items { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+.pocket-item {
+  flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px;
+  background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 999px;
+  font: 13px var(--sans); white-space: nowrap; cursor: pointer;
+}
+.pocket-item span { font-size: 16px; line-height: 1; }
+.pocket-item:hover, .pocket-item:focus-visible { border-color: var(--gold); color: var(--gold); outline: none; }
+.pocket-item[aria-pressed="true"] { border-color: var(--gold); background: #e3c27f22; color: var(--gold); }
+.pocket-blurb { margin: 2px 0 6px; font: 16px/1.5 var(--serif); }
+.pocket-links { margin: 0; padding-left: 18px; font-size: 13.5px; line-height: 1.5; }
+.pocket-links b { color: var(--gold); font-weight: 600; }
+.pocket-src { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.pocket-src:hover, .pocket-src:focus-visible { color: var(--gold); }

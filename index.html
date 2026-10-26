@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Solvay 1927 · Electrons and Photons</title>
+  <meta name="description" content="Explore the 29 physicists in the famous 1927 Solvay Conference photo: narrated stories, animated diagrams of their discoveries, connections, a timeline and guided tours.">
+  <meta name="theme-color" content="#14110f">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="The Fifth Solvay Conference, 1927">
+  <meta property="og:description" content="Twenty-nine physicists, seventeen Nobel Prizes, one photograph. Meet everyone in it.">
+  <meta property="og:image" content="assets/solvay-1927.jpg"><!-- make absolute once the site has a URL -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚛</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/graph.css">
+  <link rel="stylesheet" href="css/timeline.css">
+  <link rel="stylesheet" href="css/tours.css">
+  <link rel="stylesheet" href="css/diagrams.css">
+</head>
+<body>
+  <header>
+    <p class="kicker">Brussels · October 1927</p>
+    <h1>The Fifth Solvay Conference</h1>
+    <p class="sub">Twenty-nine physicists met to argue about electrons and photons. Seventeen of them won Nobel Prizes.
+      Point at a face to meet them; click or tap for the full story.</p>
+  </header>
+
+  <nav id="tools" aria-label="Views"></nav>
+
+  <main>
+    <p class="swipe-hint">Swipe sideways to see everyone. Tap a face for their story.</p>
+    <div class="scroller">
+      <div class="stage" id="stage">
+        <img id="photo" width="2000" height="1447" fetchpriority="high"
+          alt="Group photograph of the 29 attendees of the 1927 Solvay Conference, in three rows.">
+      </div>
+    </div>
+  </main>
+
+  <div class="tip" id="tip" role="tooltip" hidden></div>
+
+  <dialog id="detail" aria-labelledby="d-name">
+    <button class="close" data-close aria-label="Close">×</button>
+    <div class="d-head">
+      <div class="portrait" id="d-portrait"></div>
+      <div>
+        <h2 id="d-name"></h2>
+        <p class="meta" id="d-meta"></p>
+        <p class="tagline" id="d-tagline"></p>
+        <div class="chips" id="d-nobel"></div>
+        <button class="narrate" id="d-narrate">▶ Narrate</button>
+      </div>
+    </div>
+    <div class="d-body">
+      <div id="d-diagram"></div>
+      <section id="d-story" class="story"></section>
+      <section><h3>Key contributions</h3><ul id="d-contrib"></ul></section>
+      <section><h3>Awards &amp; recognition</h3><ul id="d-awards"></ul></section>
+      <section class="legacy"><h3>Why it matters</h3><p id="d-legacy"></p></section>
+      <div id="d-extra"></div>
+    </div>
+    <div class="d-nav">
+      <button id="d-prev">← Previous</button>
+      <button id="d-next">Next →</button>
+    </div>
+  </dialog>
+
+  <footer>
+    Photograph by Benjamin Couprie, Institut International de Physique Solvay, 1927, via
+    <a href="https://commons.wikimedia.org/wiki/File:Solvay_conference_1927.jpg">Wikimedia Commons</a>.
+    Narration written for this site.
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

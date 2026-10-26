@@ -1,0 +1,85 @@
+/* Connections: photo arcs, legend, network view, dialog list. Type colours come from js/graph.js via --c. */
+
+/* ── Arcs on the photo (sits under the face buttons) ── */
+.cx-overlay { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; filter: drop-shadow(0 1px 3px #000); }
+.cx-overlay .cx-line { fill: none; stroke-width: 2.6px; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.cx-overlay path { animation: cx-in .25s ease-out; }
+@keyframes cx-in { from { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .cx-overlay path { animation: none; } }
+
+/* ── Legend: floats at the bottom of the viewport while the photo is in view, at the top while the network is ── */
+.cx-legend {
+  position: relative; z-index: 5; /* not sticky: it covered the top of the network */ width: fit-content; max-width: 100%; margin: 12px auto 0;
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 8px; padding: 8px 12px;
+  background: #1f1a16ee; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 8px 24px #000a;
+  backdrop-filter: blur(6px);
+}
+.cx-hint { color: var(--muted); font-size: 13px; margin-right: 4px; }
+.cx-chip {
+  display: inline-flex; align-items: center; gap: 7px; padding: 4px 11px; font: 600 13px/1.4 var(--sans);
+  color: var(--ink); background: transparent; border: 1px solid var(--c); border-radius: 999px; cursor: pointer;
+}
+.cx-chip i, .cx-dlg h4 i, .cx-ct i { display: inline-block; width: 22px; height: 0; border-top: 3px solid var(--c); }
+i.dash { border-top-style: dashed; }
+.cx-chip b { font-size: 11px; font-weight: 600; color: var(--muted); }
+.cx-chip[aria-pressed="false"] { border-color: var(--line); color: var(--muted); }
+.cx-chip[aria-pressed="false"] i { opacity: .35; }
+.cx-chip:focus-visible, .cx-who:focus-visible, .cx-node:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+@media (max-width: 600px) {
+  .cx-legend { flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; }
+  .cx-hint, .cx-chip { flex: none; white-space: nowrap; }
+}
+
+/* ── Network view ── */
+.cx-net { margin: 36px 0 0; }
+.cx-net h2 { margin: 0 0 4px; font: 400 clamp(22px, 3vw, 30px)/1.2 var(--serif); }
+.cx-sub { margin: 0 0 14px; max-width: 720px; color: var(--muted); font-size: 15px; }
+.cx-graph {
+  position: relative; height: max(clamp(480px, 78vh, 820px), 125vw); max-height: 820px; overflow: hidden; line-height: 1.4;
+  background: radial-gradient(ellipse at center, #2a2219, var(--panel) 70%); border: 1px solid var(--line); border-radius: 10px;
+}
+.cx-load { margin: 0; padding: 24px; color: var(--muted); }
+.cx-edges { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cx-edge { transition: opacity .15s; }
+.cx-edges .cx-line { fill: none; stroke-width: 1.5px; stroke-opacity: .32; pointer-events: none; transition: stroke-width .15s, stroke-opacity .15s; }
+.cx-edges .cx-head { fill-opacity: .4; }
+.cx-graph.hl .cx-edge.on .cx-line { stroke-opacity: 1; stroke-width: 2.4px; }
+.cx-graph.hl .cx-edge.on .cx-head { fill-opacity: 1; }
+.cx-edges .cx-head { pointer-events: none; transition: fill-opacity .15s; }
+.cx-edges .cx-hit { fill: none; stroke: transparent; stroke-width: 14px; pointer-events: stroke; cursor: help; }
+.cx-edge:hover .cx-line { stroke-width: 4px; stroke-opacity: 1; }
+.cx-nodes { position: absolute; inset: 0; }
+.cx-node {
+  position: absolute; left: 0; top: 0; padding: 0; border: 0; border-radius: 42%; cursor: pointer; touch-action: none;
+  background-repeat: no-repeat; background-color: var(--line); box-shadow: 0 0 0 2px var(--line), 0 4px 12px #0008;
+  transition: opacity .15s, box-shadow .15s;
+}
+.cx-node:hover, .cx-node:focus-visible { z-index: 2; box-shadow: 0 0 0 2px var(--gold), 0 0 18px 2px #e3c27f66; }
+.cx-node:focus-visible { outline: none; }
+.cx-name {
+  position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: 3px; white-space: nowrap; pointer-events: none;
+  font: 600 11px/1.2 var(--sans); color: var(--ink); text-shadow: 0 1px 3px #000, 0 0 6px #000;
+}
+.cx-node.iso { opacity: .35; }
+.cx-graph.hl .cx-node:not(.on) { opacity: .22; }
+.cx-graph.hl .cx-edge:not(.on) { opacity: .08; }
+.cx-graph.hl .cx-node.on { box-shadow: 0 0 0 2px var(--gold); }
+.cx-card {
+  position: absolute; z-index: 3; width: 290px; max-width: calc(100% - 16px); padding: 10px 13px; font-size: 14px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 10px 30px #000c;
+}
+.cx-card[hidden] { display: none; }
+.cx-card p { margin: 0 0 4px; }
+.cx-card .cx-ct { display: flex; align-items: center; gap: 8px; color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.cx-card a { font-size: 13px; }
+
+/* ── Dialog list ── */
+.cx-dlg h4 { display: flex; align-items: center; gap: 8px; margin: 14px 0 2px; font: 600 13px var(--sans); color: var(--ink); }
+.cx-dlg h4 i { width: 18px; }
+.cx-dlg ul { list-style: none; margin: 0; padding: 0; }
+.cx-dlg li { margin: 6px 0 10px; padding-left: 26px; }
+.cx-dlg li p { margin: 2px 0 0; font-size: 15px; line-height: 1.5; }
+.cx-dlg li a { font-size: 13px; white-space: nowrap; }
+.cx-who { padding: 0; background: none; border: 0; color: var(--gold); font: 600 17px var(--serif); cursor: pointer; text-decoration: underline transparent; text-underline-offset: 3px; }
+.cx-who:hover { text-decoration-color: currentColor; }
+.cx-yrs { margin-left: 8px; color: var(--muted); font-size: 13px; }
