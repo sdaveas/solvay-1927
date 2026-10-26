@@ -1,6 +1,6 @@
 # Solvay 1927
 
-Live: https://sdaveas.github.io/solvay-1927/ · Repo: https://github.com/sdaveas/solvay-1927
+Live: https://sdaveas.github.io/solvay-1927/
 
 An interactive site about the photograph of the Fifth Solvay Conference (Brussels, October 1927). It includes:
 - the 29 attendees, each with a narrated story and an animated diagram of their key work
