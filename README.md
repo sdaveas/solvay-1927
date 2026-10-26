@@ -1,5 +1,7 @@
 # Solvay 1927
 
+Live: https://sdaveas.github.io/solvay-1927/ · Repo: https://github.com/sdaveas/solvay-1927
+
 An interactive site about the photograph of the Fifth Solvay Conference (Brussels, October 1927). It includes:
 - the 29 attendees, each with a narrated story and an animated diagram of their key work
 - the connections between them
@@ -36,12 +38,14 @@ node tools/diagram-smoke.mjs    # every diagram mounts, animates and survives it
 
 ## Deploy
 
-Upload the folder to any static host:
+Deployed to GitHub Pages: https://sdaveas.github.io/solvay-1927/ (from `main`, branch root, no build step). Pushing to `main` redeploys.
+
+Or upload the folder to any static host:
 - **GitHub Pages:** push to a repo, then Settings → Pages → deploy from the branch root.
 - **Netlify / Cloudflare Pages:** drag and drop the folder, or connect the repo. No build command; the output directory is the root.
 
 Before going live:
-1. Make `og:image` in `index.html` an absolute URL.
+1. ~~Make `og:image` in `index.html` an absolute URL.~~ Done.
 2. Optionally leave out the dev-only files: `tools/`, `PLAN.md`, `DIAGRAMS.md`, `FACTCHECK.md`, `.claude/`.
 3. Settle the photo rights (below).
 
